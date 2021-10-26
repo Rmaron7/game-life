@@ -8,7 +8,7 @@ import pygame_gui
 clock = p.time.Clock()
 pygame.init()
 pygame.font.init()
-fps = 1
+fps = 5
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 KRASIVOE = (0, 255, 255)
@@ -28,7 +28,6 @@ for i in range(height):
             for counter in range(9):
                 if gens[i][j][counter] != 1:
                     gens[i][j][counter] = 0
-                gens[i][j][3] = 1
 
 
 def near(pos: list, cellaround=[[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]):
@@ -80,43 +79,7 @@ while work:
                     for counter in range(9):
                         if gensn[i][j][counter] != 1:
                             gensn[i][j][counter] = 0
-                        gens[i][j][3] = 1
 
     cells = cellsn
     gens = gensn
     clock.tick(fps)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
