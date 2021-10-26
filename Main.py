@@ -8,7 +8,7 @@ import pygame_gui
 clock = p.time.Clock()
 pygame.init()
 pygame.font.init()
-fps = 5
+fps = 1
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 KRASIVOE = (0, 255, 255)
@@ -29,7 +29,7 @@ for i in range(height):
                 if gens[i][j][counter] != 1:
                     gens[i][j][counter] = 0
 
-
+#функция для проверки всех клеток вокруг
 def near(pos: list, cellaround=[[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]):
     counternear = 0
     for i in cellaround:
@@ -50,6 +50,7 @@ while work:
             blue = 85 * (gens[i][j][4] + gens[i][j][5] + gens[i][j][3])
             cellcolor = (red, green, blue)
             p.draw.rect(screen, (cellcolor), [j * 20, i * 20, 20, 20])
+            #отрисовка
 
     p.display.update()
 
@@ -71,6 +72,7 @@ while work:
                     cellsn[i][j] = 0
                     gensn[i][j] = [0] * 9
                 alive = False
+                #перепись живых и мертвых на живых
 
             if cells[i][j] == 0:
                 if near([i, j]) == 3:
@@ -79,42 +81,7 @@ while work:
                     for counter in range(9):
                         if gensn[i][j][counter] != 1:
                             gensn[i][j][counter] = 0
-
+    # перепись живых и мертвых на мертвых
     cells = cellsn
     gens = gensn
     clock.tick(fps)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
