@@ -28,7 +28,6 @@ for i in range(height):
             for counter in range(9):
                 if gens[i][j][counter] != 1:
                     gens[i][j][counter] = 0
-                gens[i][j][2] = 1
                 gens[i][j][3] = 1
 
 
@@ -81,7 +80,6 @@ while work:
                     for counter in range(9):
                         if gensn[i][j][counter] != 1:
                             gensn[i][j][counter] = 0
-                        gens[i][j][2] = 1
                         gens[i][j][3] = 1
 
     cells = cellsn
