@@ -35,8 +35,7 @@ for i in range(height):
 def near(pos: list, cellaround=[[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]):
     counternear = 0
     for i in cellaround:
-        if cells[(pos[0] + i[0]) % len(cells)][(pos[1] + i[1]) % len(cells[0])]:
-            counternear += 1
+        counternear += cells[(pos[0] + i[0]) % len(cells)][(pos[1] + i[1]) % len(cells[0])]
     return counternear
 
 
@@ -61,30 +60,61 @@ while work:
 
     for i in range(len(cells)):
         for j in range(len(cells[0])):
-            if cells[i][j]:
-                if cells[i][j] == 1:
-                    for counter in range(9):
-                        if gens[i][j][counter] == 1:
-                            if near([i, j]) == counter:
-                                alive = True
-                    if alive:
-                        cellsn[i][j] = cells[i][j]
-                        gensn[i][j] = gens[i][j]
-                    if not alive:
-                        cellsn[i][j] = 0
-                        gensn[i][j] = [0] * 9
-                    alive = False
+            print(near([i, j]), cells[i][j]);
+            if cells[i][j] == 1:
+                for counter in range(9):
+                    if gens[i][j][counter] == 1:
+                        if near([i, j]) == counter:
+                            alive = True
+                if alive:
+                    cellsn[i][j] = cells[i][j]
+                    gensn[i][j] = gens[i][j]
+                if not alive:
+                    cellsn[i][j] = 0
+                    gensn[i][j] = [0] * 9
+                alive = False
 
-                if cells[i][j] == 0:
-                    if near([i, j]) == 3:
-                        cellsn[i][j] = 1
-                        gensn[i][j] = [random.choice([0, 1, 2, 3]) for counter in range(9)]
-                        for counter in range(9):
-                            if gensn[i][j][counter] != 1:
-                                gensn[i][j][counter] = 0
-                            gens[i][j][2] = 1
-                            gens[i][j][3] = 1
+            if cells[i][j] == 0:
+                if near([i, j]) == 3:
+                    cellsn[i][j] = 1
+                    gensn[i][j] = [random.choice([0, 1, 2, 3]) for counter in range(9)]
+                    for counter in range(9):
+                        if gensn[i][j][counter] != 1:
+                            gensn[i][j][counter] = 0
+                        gens[i][j][2] = 1
+                        gens[i][j][3] = 1
 
     cells = cellsn
     gens = gensn
     clock.tick(fps)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
