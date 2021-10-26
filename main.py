@@ -1,8 +1,9 @@
 import pygame as pg
 
+
 def main():
-    screen = pg.display.set_mode((1920, 1080))
-    font = pg.font.SysFont('Comic Sans MS', 32)
+    screen = pg.display.set_mode((640, 480))
+    font = pg.font.Font(None, 32)
     clock = pg.time.Clock()
     input_box = pg.Rect(100, 100, 140, 32)
     color_inactive = pg.Color('lightskyblue3')
@@ -11,48 +12,26 @@ def main():
     active = False
     text = ''
     done = False
-    x = int()
-    y = int()
-    WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    BLUE = (0, 0, 255)
-    RED = (255, 0, 0)
-    GREEN = (0, 255, 0)
-    counter = int(10)
-    messageh = font.render("Введите высоту поля в клетках(0-100). Если вы введете число больше, оно округлится до 100", 1, WHITE, BLACK)
-    messagew = font.render("Введите ширину поля в клетках(0-150). Если вы введете число больше, оно округлится до 150", 1, WHITE, BLACK)
-
 
     while not done:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 done = True
-            while counter > 5:
-                for event in pg.event.get():
-                    if event.type == pg.QUIT:
-                        done = True
-                if event.type == pg.MOUSEBUTTONDOWN:
-                    if input_box.collidepoint(event.pos):
-                        active = not active
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if input_box.collidepoint(event.pos):
+                    active = not active
+                else:
+                    active = False
+                color = color_active if active else color_inactive
+            if event.type == pg.KEYDOWN:
+                if active:
+                    if event.key == pg.K_RETURN:
+                        print(text)
+                        text = ''
+                    elif event.key == pg.K_BACKSPACE:
+                        text = text[:-1]
                     else:
-                        active = False
-                    color = GREEN if active else RED
-                if event.type == pg.KEYDOWN:
-                    if active:
-                        if event.key == pg.K_RETURN:
-                            height = int(text)
-                            text = ''
-                            if height > 100:
-                                height = 100
-                            if height<= 100:
-                                counter = 1
-                        elif event.key == pg.K_BACKSPACE:
-                            text = text[:-1]
-                            height = int(text)
-                        else:
-                            text += event.unicode
-                            height = int(text)
-
+                        text += event.unicode
 
         screen.fill((30, 30, 30))
         txt_surface = font.render(text, True, color)
@@ -63,16 +42,6 @@ def main():
 
         pg.display.flip()
         clock.tick(30)
-
-
-
-        for x in range(width):
-            pg.draw.aaline(screen, WHITE, [width * 8, 0], [width * 8, height*8], 1)
-            pg.draw.aaline(screen, WHITE, [width * 8+1, 0], [width * 8+1, height * 8], 1)
-
-        for x in range(height):
-            pg.draw.aaline(screen, WHITE, [0, height*8], [width * 8, height*8], 1)
-            pg.draw.aaline(screen, WHITE, [0, height*8+1], [width * 8, height * 8+1], 1)
 
 
 if __name__ == '__main__':
