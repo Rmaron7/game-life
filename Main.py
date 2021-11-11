@@ -57,9 +57,9 @@ buttonrestart = pygame_gui.elements.UIButton(
     )
 
 sliderprobability = pygame_gui.elements.UIHorizontalSlider(
-    relative_rect=pygame.Rect(1800, 210, 120, 30),
-    start_value=0,
-    value_range=(0, 10),
+    relative_rect=pygame.Rect(1800, 210, 120, 30), 
+    start_value=20,
+    value_range=(0, 20),
     manager=manager
     )
 
@@ -178,6 +178,8 @@ while mainrun:
                     eventheight = int(event.pos[1]//20)
                     cells[eventheight][eventwidth] = 0
                     gens[eventheight][eventwidth] = [0]*9
+                    cellsn[eventheight][eventwidth] = 0
+                    gensn[eventheight][eventwidth] = [0]*9
                     field_updated = True
 
         if event.type == pygame.USEREVENT:
@@ -262,8 +264,8 @@ while mainrun:
                 for j in range(0, len(cells[ i ])):
                     if (cells [i][j] == 1):
                         red = 60 + 65 * (gens[ i ][ j ][ 1 ] + gens[ i ][ j ][ 2 ] + gens[ i ][ j ][ 0 ])
-                        blue = 60 + 65 * (gens[ i ][ j ][ 7 ] + gens[ i ][ j ][ 8 ] + gens[ i ][ j ][ 6 ])
                         green = 60 + 65 * (gens[ i ][ j ][ 4 ] + gens[ i ][ j ][ 5 ] + gens[ i ][ j ][ 3 ])
+                        blue = 60 + 65 * (gens[ i ][ j ][ 7 ] + gens[ i ][ j ][ 8 ] + gens[ i ][ j ][ 6 ])
                         cellcolor = (red, green, blue)
                     else:
                         cellcolor = (0,0,0)
@@ -320,7 +322,6 @@ while mainrun:
 #-----------------------------------------------------------------------------------------------------------------------
     if started != 0:
         fps_2 = 26 - sliderfps.get_current_value()
-    #clock.tick(fps)
 
     valueprobability.set_text(str((sliderprobability.get_current_value() / 100)))
 
